@@ -18,7 +18,8 @@ HEADERS += \
     Models/pointtopoint.h \
     mainwindow.h \
     pointtopoint.h \
-    qcustomplot.h
+    qcustomplot.h \
+    spline.h
 
 FORMS += \
     mainwindow.ui

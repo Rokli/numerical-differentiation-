@@ -35,9 +35,11 @@ void MainWindow::on_CalculationDerivatives_clicked()
 {
     ui->textEdit->clear();
     ui->textEdit->setPlainText("Значение производной:");
+
     double X = ui->pointGraph->text().toFloat();
     double prevTmp = 0;
     double tmp = PointToPoint::CalculationFormulaRigth(X,pow(10,-1));
+
     ui->textEdit->setPlainText(ui->textEdit->toPlainText() +"\n" + QString::number(tmp));
     int i = 2;
     do{
@@ -46,6 +48,7 @@ void MainWindow::on_CalculationDerivatives_clicked()
         ui->textEdit->setPlainText(ui->textEdit->toPlainText() +"\n" + QString::number(tmp));
         i++;
     }while(prevTmp > tmp);
+
     ui->textEdit->setPlainText(ui->textEdit->toPlainText() +"\n" + "Оптимальный шаг:\t" + "10 в -" + QString::number(i));
 }
 
