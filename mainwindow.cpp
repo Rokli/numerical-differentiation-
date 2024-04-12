@@ -7,10 +7,11 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    float delta = 0.001;
-    float X = 1;
+    float X = 0.1;
+    QString textForm;
     for(int i = 1; i < 8; i++){
-        x.push_back(PointToPoint::CalculationFormula(X,pow(10,-i)));
+        textForm = ui->textEdit->toPlainText();
+        ui->textEdit->setPlainText(textForm +"\n" +QString::number(PointToPoint::CalculationFormula(X,pow(10,-i))));
     }
     // h = 0.1;
     // XBegin = -3;

@@ -20,7 +20,6 @@ public:
 private slots:
 private:
     Ui::MainWindow *ui;
-
     double XBegin,Xend,h,X;
     int n;
     QVector<double> x,y;
