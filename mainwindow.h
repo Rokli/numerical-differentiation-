@@ -18,6 +18,8 @@ public:
     ~MainWindow();
 
 private slots:
+    void on_CalculationDerivatives_clicked();
+
 private:
     Ui::MainWindow *ui;
     double XBegin,Xend,h,X;

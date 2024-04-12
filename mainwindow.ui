@@ -24,35 +24,45 @@
      </rect>
     </property>
    </widget>
-   <widget class="QTextEdit" name="textEdit">
-    <property name="geometry">
-     <rect>
-      <x>440</x>
-      <y>70</y>
-      <width>251</width>
-      <height>151</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QWidget" name="">
     <property name="geometry">
      <rect>
       <x>440</x>
       <y>10</y>
-      <width>121</width>
-      <height>51</height>
+      <width>258</width>
+      <height>284</height>
      </rect>
     </property>
-    <layout class="QVBoxLayout" name="verticalLayout">
+    <layout class="QVBoxLayout" name="verticalLayout_2">
      <item>
-      <widget class="QLabel" name="label">
-       <property name="text">
-        <string>Введите точку</string>
-       </property>
-      </widget>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>Введите точку</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="pointGraph"/>
+       </item>
+      </layout>
      </item>
      <item>
-      <widget class="QLineEdit" name="pointGraph"/>
+      <widget class="QTextEdit" name="textEdit"/>
+     </item>
+     <item>
+      <widget class="QPushButton" name="CalculationDerivatives">
+       <property name="text">
+        <string>Рассчитать </string>
+       </property>
+       <property name="default">
+        <bool>false</bool>
+       </property>
+       <property name="flat">
+        <bool>false</bool>
+       </property>
+      </widget>
      </item>
     </layout>
    </widget>
