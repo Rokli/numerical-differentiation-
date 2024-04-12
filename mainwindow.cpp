@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "pointtopoint.h"
+#include "Models/pointtopoint.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -21,9 +21,9 @@ MainWindow::MainWindow(QWidget *parent)
     // }
     ui->widget->setInteraction(QCP::iRangeZoom,true);
     ui->widget->setInteraction(QCP::iRangeDrag,true);
-    ui->widget->addGraph();
-    ui->widget->graph(0)->addData(x,y);
-    ui->widget->replot();
+    // ui->widget->addGraph();
+    // ui->widget->graph(0)->addData(x,y);
+    // ui->widget->replot();
 }
 
 MainWindow::~MainWindow()
@@ -37,8 +37,9 @@ void MainWindow::on_CalculationDerivatives_clicked()
     float X = ui->pointGraph->text().toFloat();
     QString textForm;
     for(int i = 1; i < 8; i++){
+        float tmp = PointToPoint::CalculationFormulaRigth(X,pow(10,-i));
         textForm = ui->textEdit->toPlainText();
-        ui->textEdit->setPlainText(textForm +"\n" +QString::number(PointToPoint::CalculationFormula(X,pow(10,-i))));
+        ui->textEdit->setPlainText(textForm +"\n" +QString::number(tmp));
     }
 }
 
