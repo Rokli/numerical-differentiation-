@@ -14,9 +14,6 @@ public:
     static  float FirstDerivative(float x){
         return 4 * pow(x,2);
     }
-    static  float TwoDerivative(float x){
-        return 8;
-    }
 };
 
 #endif // POINTTOPOINT_H
