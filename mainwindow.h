@@ -1,9 +1,10 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include  <spline.h>
 #include <QMainWindow>
 #include <QVector>
-#include <QTableWidget>;
+#include <QTableWidget>
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -20,6 +21,8 @@ public:
 
 private slots:
     void on_CalculationDerivatives_clicked();
+
+    void on_CreateTable_clicked();
 
 private:
     Ui::MainWindow *ui;

@@ -52,3 +52,9 @@ void MainWindow::on_CalculationDerivatives_clicked()
     ui->textEdit->setPlainText(ui->textEdit->toPlainText() +"\n" + "Оптимальный шаг:\t" + "10 в -" + QString::number(i));
 }
 
+
+void MainWindow::on_CreateTable_clicked()
+{
+    ui->tablePoints->setRowCount(ui->NumberPoints->text().toInt());
+}
+
