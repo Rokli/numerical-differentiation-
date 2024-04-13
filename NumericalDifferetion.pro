@@ -16,6 +16,7 @@ SOURCES += \
     qcustomplot.cpp
 
 HEADERS += \
+    Models/Sorting.h \
     Models/nuton.h \
     Models/pointtopoint.h \
     Models/spline.h \

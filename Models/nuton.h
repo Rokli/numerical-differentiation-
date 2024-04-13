@@ -5,7 +5,6 @@ using namespace std;
 class Nuton
 {
 public:
-    Nuton();
     vector<float> divDiff,yV,xV;
     float DividedDifferences(vector<float> x,vector<float> y, int k){
         float result = 0;
@@ -32,9 +31,9 @@ public:
         for(int k = 0; k < (int)xV.size();k++){
             float mul = 1;
             for(int j = 0; j < k; j++){
-                mul *= x - divDiff[k-1] * mul;
+                mul *= x - xV[j];
             }
-            result += divDiff[k-1] * mul;
+            result += divDiff[k] * mul;
         }
         return result;
     }

@@ -1,10 +1,11 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <Models/Sorting.h>
 #include <QMainWindow>
-#include <QVector>
 #include <QTableWidget>
-#include  <Models/nuton.h>
+#include <QVector>
+#include <Models/nuton.h>
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -28,8 +29,9 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    std::vector<float> xs,ys;
-    QVector<double> x,y;
+    std::vector<float> xs, ys;
+    QVector<double> x, y;
     Nuton nuton;
+    float xBegin, xEnd,h;
 };
 #endif // MAINWINDOW_H

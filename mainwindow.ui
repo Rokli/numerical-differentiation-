@@ -120,9 +120,6 @@
       </widget>
      </item>
      <item>
-      <widget class="QTextEdit" name="Edit"/>
-     </item>
-     <item>
       <widget class="QPushButton" name="CreateTable">
        <property name="text">
         <string>Создать таблицу</string>
