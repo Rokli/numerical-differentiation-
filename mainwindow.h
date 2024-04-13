@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QVector>
 #include <QTableWidget>
+#include  <Models/nuton.h>
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -29,5 +30,6 @@ private:
     Ui::MainWindow *ui;
     std::vector<float> xs,ys;
     QVector<double> x,y;
+    Nuton nuton;
 };
 #endif // MAINWINDOW_H

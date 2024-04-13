@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "Models/pointtopoint.h"
 #include  <Models/spline.h>
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -66,18 +67,25 @@ void MainWindow::on_CreateGraph_clicked()
 
     for(int i = 0; i < ui->tablePoints->rowCount();i++)
         ys.push_back(ui->tablePoints->item(i, 1)->text().toFloat());
-
-    Spline spline(xs,ys);
-
-    for(int i = 0; i < ui->tablePoints->rowCount();i++)
-        x.push_back(ui->tablePoints->item(i, 0)->text().toFloat());
+    nuton.NewtonPolinominal(xs,ys);
 
     for(int i = 0; i < ui->tablePoints->rowCount();i++)
-        y.push_back(spline.Interpolate(ui->tablePoints->item(i, 0)->text().toFloat()));
+        x.push_back(xs[i]);
+    for(int i = 0; i < ui->tablePoints->rowCount();i++)
+        y.push_back(nuton.polynominal(ys[i]));
+
     QCPGraph *spl = ui->graph->addGraph();
     spl->setPen(QPen(Qt::blue));
-    spl->setLineStyle(QCPGraph::lsLine);
+    QCPItemTracer *tracer = new QCPItemTracer(ui->graph);
+    tracer->setGraph(spl);
+    tracer->setInterpolating(true);
+
+    // spl->setLineStyle(QCPGraph::);
+    // spl->setLineStyle(QCPGraph::lsLine);
     spl->setData(x, y);
+
+    //  ui->graph->xAxis->setRange(-0.5,0.5);
+    // ui->graph->yAxis->setRange(-0.5,0.5);
     ui->graph->replot();
     // ui->graph->addGraph();
     // ui->graph->graph(0)->addData(x,y);

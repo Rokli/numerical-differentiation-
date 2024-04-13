@@ -9,12 +9,14 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    Models/nuton.cpp \
     main.cpp \
     mainwindow.cpp \
     pointtopoint.cpp \
     qcustomplot.cpp
 
 HEADERS += \
+    Models/nuton.h \
     Models/pointtopoint.h \
     Models/spline.h \
     mainwindow.h \
