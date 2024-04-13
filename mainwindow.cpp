@@ -77,24 +77,12 @@ void MainWindow::on_CreateGraph_clicked()
         y.push_back(nuton.polynominal(xs[i]));
         i++;
     }
-    // for (int i = 0; i < ui->tablePoints->rowCount(); i++)
-    //     x.push_back(xs[i]);
-    // for (int i = 0; i < ui->tablePoints->rowCount(); i++)
-    //     y.push_back(nuton.polynominal(xs[i]));
-
     QCPGraph *spl = ui->graph->addGraph();
     spl->setPen(QPen(Qt::blue));
     QCPItemTracer *tracer = new QCPItemTracer(ui->graph);
     tracer->setGraph(spl);
     tracer->setInterpolating(true);
-
-    // spl->setLineStyle(QCPGraph::);
+    tracer->setStyle(QCPItemTracer::tsCrosshair);;
     spl->setData(x, y);
-
-    //  ui->graph->xAxis->setRange(-0.5,0.5);
-    // ui->graph->yAxis->setRange(-0.5,0.5);
     ui->graph->replot();
-    // ui->graph->addGraph();
-    // ui->graph->graph(0)->addData(x,y);
-    // ui->graph->replot();
 }
