@@ -16,6 +16,7 @@ SOURCES += \
 
 HEADERS += \
     Models/pointtopoint.h \
+    Models/spline.h \
     mainwindow.h \
     pointtopoint.h \
     qcustomplot.h \

@@ -1,7 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include  <spline.h>
+#include  <Models/spline.h>
 #include <QMainWindow>
 #include <QVector>
 #include <QTableWidget>
