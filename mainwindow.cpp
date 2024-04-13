@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "Models/pointtopoint.h"
-
+#include  <Models/spline.h>
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -19,8 +19,8 @@ MainWindow::MainWindow(QWidget *parent)
     //         x.push_back(X);
     //         y.push_back(X*X);
     // }
-    ui->widget->setInteraction(QCP::iRangeZoom,true);
-    ui->widget->setInteraction(QCP::iRangeDrag,true);
+    ui->graph->setInteraction(QCP::iRangeZoom,true);
+    ui->graph->setInteraction(QCP::iRangeDrag,true);
     // ui->widget->addGraph();
     // ui->widget->graph(0)->addData(x,y);
     // ui->widget->replot();
@@ -56,5 +56,31 @@ void MainWindow::on_CalculationDerivatives_clicked()
 void MainWindow::on_CreateTable_clicked()
 {
     ui->tablePoints->setRowCount(ui->NumberPoints->text().toInt());
+}
+
+
+void MainWindow::on_CreateGraph_clicked()
+{
+    for(int i = 0; i < ui->tablePoints->rowCount();i++)
+        xs.push_back(ui->tablePoints->item(i, 0)->text().toFloat());
+
+    for(int i = 0; i < ui->tablePoints->rowCount();i++)
+        ys.push_back(ui->tablePoints->item(i, 1)->text().toFloat());
+
+    Spline spline(xs,ys);
+
+    for(int i = 0; i < ui->tablePoints->rowCount();i++)
+        x.push_back(ui->tablePoints->item(i, 0)->text().toFloat());
+
+    for(int i = 0; i < ui->tablePoints->rowCount();i++)
+        y.push_back(spline.Interpolate(ui->tablePoints->item(i, 0)->text().toFloat()));
+    QCPGraph *spl = ui->graph->addGraph();
+    spl->setPen(QPen(Qt::blue));
+    spl->setLineStyle(QCPGraph::lsLine);
+    spl->setData(x, y);
+    ui->graph->replot();
+    // ui->graph->addGraph();
+    // ui->graph->graph(0)->addData(x,y);
+    // ui->graph->replot();
 }
 

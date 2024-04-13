@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QCustomPlot" name="widget" native="true">
+   <widget class="QCustomPlot" name="graph" native="true">
     <property name="geometry">
      <rect>
       <x>0</x>
@@ -95,7 +95,7 @@
      </size>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>440</x>

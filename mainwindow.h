@@ -1,7 +1,6 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include  <Models/spline.h>
 #include <QMainWindow>
 #include <QVector>
 #include <QTableWidget>
@@ -24,10 +23,11 @@ private slots:
 
     void on_CreateTable_clicked();
 
+    void on_CreateGraph_clicked();
+
 private:
     Ui::MainWindow *ui;
-    double XBegin,Xend,h,X;
-    int n;
+    std::vector<float> xs,ys;
     QVector<double> x,y;
 };
 #endif // MAINWINDOW_H
