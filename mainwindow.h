@@ -6,6 +6,7 @@
 #include <QTableWidget>
 #include <QVector>
 #include <Models/nuton.h>
+#include <Models/PaintGraph.h>
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
