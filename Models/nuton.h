@@ -26,7 +26,7 @@ public:
             divDiff.push_back(DividedDifferences(x,y,i));
         }
     }
-    float polynominal(float x){
+    float Polynominal(float x){
         float result = yV[0];
         for(int k = 0; k < (int)xV.size();k++){
             float mul = 1;

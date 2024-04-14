@@ -51,20 +51,5 @@ void MainWindow::on_CreateGraph_clicked()
     for (int i = 0; i < ui->tablePoints->rowCount(); i++)
         ys.push_back(ui->tablePoints->item(i, 1)->text().toFloat());
     PaintGraph paint(ui,xs,ys);
-    paint.PaintNuton();
-    // nuton.NewtonPolinominal(xs,ys);
-    // xBegin = Sorting::VectorMinToFloat(xs);
-    // xEnd = Sorting::VectorMaxToFloat(xs);
-    // for(float X = xBegin; X <= xEnd; X += h){
-    //     x.push_back(X);
-    //     y.push_back(nuton.polynominal(X));
-    // }
-    // QCPGraph *spl = ui->graph->addGraph();
-    // spl->setPen(QPen(Qt::blue));
-    // QCPItemTracer *tracer = new QCPItemTracer(ui->graph);
-    // tracer->setGraph(spl);
-    // tracer->setInterpolating(true);
-    // tracer->setStyle(QCPItemTracer::tsCrosshair);;
-    // spl->setData(x, y);
-    // ui->graph->replot();
+    paint.PaintSpline();
 }

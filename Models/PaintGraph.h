@@ -3,13 +3,14 @@
 #include "ui_mainwindow.h"
 #include "Models/Sorting.h"
 #include "Models/nuton.h"
+#include "spline.h"
 #include <vector>
 using namespace std;
 
 class PaintGraph{
 private:
     Ui::MainWindow *ui;
-    float xBegin, xEnd,h = 0.1;
+    float xBegin, xEnd,h = 0.01;
     vector<float> xs,ys;
     QCPItemTracer *tracer;
     QCPGraph *spl;
@@ -18,6 +19,10 @@ private:
     {
         xBegin = Sorting::VectorMinToFloat(xs);
         xEnd = Sorting::VectorMaxToFloat(xs);
+    }
+    void SettingGraph(){
+        ui->graph->xAxis->setTicks(true);
+        ui->graph->yAxis->setTicks(true);        // автоматически устанавливать деления
     }
     void SettingSpl(){
         spl = ui->graph->addGraph();
@@ -37,6 +42,7 @@ public:
         SetBeginEndH();
         SettingSpl();
         SettingTracer();
+        SettingGraph();
     }
     void PaintNuton(){
         QVector<double> x, y;
@@ -44,12 +50,22 @@ public:
         nuton.NewtonPolinominal(xs, ys);
         for(float X = xBegin; X <= xEnd; X += h){
             x.push_back(X);
-            y.push_back(nuton.polynominal(X));
+            y.push_back(nuton.Polynominal(X));
         }
         spl->setData(x, y);
         ui->graph->replot();
     }
-
+    void PaintSpline(){
+        QVector<double> x, y;
+        Spline spline;
+        spline.CreateSpline(xs,ys);
+        for(float X = xBegin; X <= xEnd; X += h){
+            x.push_back(X);
+            y.push_back(spline.Interpolat(X));
+        }
+        spl->setData(x, y);
+        ui->graph->replot();
+    }
 };
 
 #endif // PAINTGRAPH_H
