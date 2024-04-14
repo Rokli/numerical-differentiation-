@@ -18,6 +18,7 @@ SOURCES += \
 HEADERS += \
     Models/PaintGraph.h \
     Models/Sorting.h \
+    Models/WorkingWithDerivatives.h \
     Models/nuton.h \
     Models/pointtopoint.h \
     Models/spline.h \
