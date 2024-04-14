@@ -3,6 +3,7 @@
 #include "ui_mainwindow.h"
 #include "Models/Sorting.h"
 #include "Models/nuton.h"
+#include "Models/WorkingWithDerivatives.h"
 #include "spline.h"
 #include <vector>
 using namespace std;
@@ -22,7 +23,7 @@ private:
     }
     void SettingGraph(){
         ui->graph->xAxis->setTicks(true);
-        ui->graph->yAxis->setTicks(true);        // автоматически устанавливать деления
+        ui->graph->yAxis->setTicks(true);
     }
     void SettingSpl(){
         spl = ui->graph->addGraph();
@@ -62,6 +63,24 @@ public:
         for(float X = xBegin; X <= xEnd; X += h){
             x.push_back(X);
             y.push_back(spline.Interpolat(X));
+        }
+        spl->setData(x, y);
+        ui->graph->replot();
+    }
+    void PaintDiff(){
+        QVector<double> x, y;
+        vector<float> splineValuesY,splineValuesX;
+        Spline spline;
+        spline.CreateSpline(xs,ys);
+        for(float X = xBegin; X <= xEnd; X += h){
+            splineValuesX.push_back(X);
+            splineValuesY.push_back(spline.Interpolat(X));
+        }
+        int i = 1;
+        for(float X = xBegin + h; X <= xEnd; X += h){
+            x.push_back(X);
+            y.push_back(WorkingWithDerivatives::FirstDerivatives(splineValuesY[i-1],splineValuesY[i],h));
+            i++;
         }
         spl->setData(x, y);
         ui->graph->replot();
