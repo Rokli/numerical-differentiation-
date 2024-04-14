@@ -42,7 +42,7 @@ public:
         this->ui = ui;
         SetBeginEndH();
         SettingSpl();
-        SettingTracer();
+        // SettingTracer();
         SettingGraph();
     }
     void PaintNuton(){
@@ -67,7 +67,7 @@ public:
         spl->setData(x, y);
         ui->graph->replot();
     }
-    void PaintDiff(){
+    void PaintFirstDiff(){
         QVector<double> x, y;
         vector<float> splineValuesY,splineValuesX;
         Spline spline;
@@ -80,6 +80,24 @@ public:
         for(float X = xBegin + h; X <= xEnd; X += h){
             x.push_back(X);
             y.push_back(WorkingWithDerivatives::FirstDerivatives(splineValuesY[i-1],splineValuesY[i],h));
+            i++;
+        }
+        spl->setData(x, y);
+        ui->graph->replot();
+    }
+    void PaintSecondDiff(){
+        QVector<double> x, y;
+        vector<float> splineValuesY,splineValuesX;
+        Spline spline;
+        spline.CreateSpline(xs,ys);
+        for(float X = xBegin; X <= xEnd; X += h){
+            splineValuesX.push_back(X);
+            splineValuesY.push_back(spline.Interpolat(X));
+        }
+        int i = 2;
+        for(float X = xBegin + h; X <= xEnd; X += h){
+            x.push_back(X);
+            y.push_back(WorkingWithDerivatives::SecondDerivatives(splineValuesY[i-2],splineValuesY[i+2],splineValuesY[i],h));
             i++;
         }
         spl->setData(x, y);
