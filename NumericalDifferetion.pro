@@ -17,6 +17,7 @@ SOURCES += \
 
 HEADERS += \
     Models/PaintGraph.h \
+    Models/PassingIteration.h \
     Models/Sorting.h \
     Models/WorkingWithDerivatives.h \
     Models/nuton.h \

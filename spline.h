@@ -2,6 +2,7 @@
 #define SPLIEN_H
 #include <iostream>
 #include <vector>
+#include <Models/PassingIteration.h>
 using namespace std;
 class Spline
 {
@@ -49,6 +50,25 @@ public:
             b[j] = (float)(((a[j + 1] - a[j]) / h[j]) - (h[j] * (c[j + 1] + 2 * c[j]) / 3));
             d[j] = (float)((c[j + 1] - c[j]) / (3 * h[j]));
         }
+    }
+    vector<float> GetC(vector<float> c, vector<float> alpha, vector<float> h){
+        vector<vector<float>> matrix;
+        matrix.resize(c.size()-1);
+        vector<float> freeNumbers;
+        freeNumbers.resize(c.size()-1);
+        int rowIndex = 1;
+        matrix[0][0] = 1;
+
+        for(int i = 1; i < (int)c.size(); i++){
+            matrix[rowIndex][ i -1] = h[i -1];
+            matrix[rowIndex][i] = 2 * (h[i-1] + h[i]);
+            if(i+1 != (int)c.size() - 1)
+                matrix[rowIndex][i+1] = h[i];
+            freeNumbers[rowIndex] = alpha[rowIndex];
+            rowIndex++;
+        }
+        c = PassingMethod::Start(matrix,freeNumbers);
+        return c;
     }
     double Interpolat(double xi)
     {
