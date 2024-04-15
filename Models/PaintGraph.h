@@ -15,6 +15,7 @@ private:
     vector<float> xs,ys;
     QCPItemTracer *tracer;
     QCPGraph *spl;
+    vector<vector<float>> matrix;
 private:
     void SetBeginEndH()
     {
@@ -64,6 +65,7 @@ public:
             x.push_back(X);
             y.push_back(spline.Interpolat(X));
         }
+        matrix = spline.GetMatrix();
         spl->setData(x, y);
         ui->graph->replot();
     }
@@ -102,6 +104,16 @@ public:
         }
         spl->setData(x, y);
         ui->graph->replot();
+    }
+    void PaintMatrix(){
+        ui->forMatrix->clear();
+        // ui->forMatrix->setPlainText("Matrix:" + "\n");
+        for(int i = 0; i < (int)matrix.size(); i++){
+            for(int j = 0; j < (int) matrix.size();j++){
+                ui->forMatrix->setPlainText(ui->forMatrix->toPlainText() + "\t" + QString::number(matrix[i][j]));
+            }
+            ui->forMatrix->setPlainText(ui->forMatrix->toPlainText() + "\n");
+        }
     }
 };
 

@@ -35,8 +35,7 @@ void MainWindow::on_CalculationDerivatives_clicked()
         i++;
     } while (prevTmp > tmp);
 
-    ui->textEdit->setPlainText(ui->textEdit->toPlainText() + "\n" + "Оптимальный шаг:\t" + "10 в -"
-                               + QString::number(i));
+    ui->textEdit->setPlainText(ui->textEdit->toPlainText() + "\n" + "Оптимальный шаг:\t" + "10 в -" + QString::number(i));
 }
 
 void MainWindow::on_CreateTable_clicked()
@@ -51,5 +50,7 @@ void MainWindow::on_CreateGraph_clicked()
     for (int i = 0; i < ui->tablePoints->rowCount(); i++)
         ys.push_back(ui->tablePoints->item(i, 1)->text().toFloat());
     PaintGraph paint(ui,xs,ys);
-    paint.PaintSecondDiff();
+    // paint.PaintSecondDiff();
+    paint.PaintSpline();
+    paint.PaintMatrix();
 }

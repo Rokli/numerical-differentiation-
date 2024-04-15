@@ -8,7 +8,7 @@ class Spline
 {
 private:
     vector<float> x, y, a, b, c, d;
-
+    vector<vector<float>> m;
 public:
     void CreateSpline(vector<float> x, vector<float> y)
     {
@@ -16,21 +16,21 @@ public:
         this->y = y;
         a = y;
         int n = (int)x.size();
-        vector<double> h;
+        vector<float> h;
         h.resize(n - 1 );
         for(int i = 0; i < n -1; i++){
             h[i] = x[i+1] - x[i];
         }
-        vector<double> alpha;
+        vector<float> alpha;
         alpha.resize(n);
         for(int i = 1; i < n - 1; i++){
             alpha[i] = (3 / h[i]) * (a[i + 1] - a[i]) - (3 / h[i - 1]) * (a[i] - a[i - 1]);
         }
-        vector<double> l;
+        vector<float> l;
         l.resize(n);
-        vector<double> mu;
+        vector<float> mu;
         mu.resize(n);
-        vector<double> z;
+        vector<float> z;
         z.resize(n);
         l[0] = 1;
         mu[0] = 0;
@@ -42,20 +42,24 @@ public:
         }
         l[n - 1] = 1;
         z[n - 1] = 0;
+
         c.resize(n);
         b.resize(n);
         d.resize(n);
+        GetM(alpha,h);
         for(int j = n - 2; j >= 0; j--){
             c[j] = (float)(z[j] - mu[j] * c[j + 1]);
             b[j] = (float)(((a[j + 1] - a[j]) / h[j]) - (h[j] * (c[j + 1] + 2 * c[j]) / 3));
             d[j] = (float)((c[j + 1] - c[j]) / (3 * h[j]));
         }
     }
-    vector<float> GetC(vector<float> c, vector<float> alpha, vector<float> h){
-        vector<vector<float>> matrix;
-        matrix.resize(c.size()-1);
+    void GetM(vector<float> alpha, vector<float> h){
+        vector<vector<float>> matrix(c.size());
+        for(int i = 0; i < (int)c.size();i++){
+            matrix[i].resize(c.size());
+        }
         vector<float> freeNumbers;
-        freeNumbers.resize(c.size()-1);
+        freeNumbers.resize(c.size());
         int rowIndex = 1;
         matrix[0][0] = 1;
 
@@ -67,8 +71,11 @@ public:
             freeNumbers[rowIndex] = alpha[rowIndex];
             rowIndex++;
         }
-        c = PassingMethod::Start(matrix,freeNumbers);
-        return c;
+        PassingMethod passingMethod;
+        m = passingMethod.Start(matrix,freeNumbers);
+    }
+    vector<vector<float>> GetMatrix(){
+        return m;
     }
     double Interpolat(double xi)
     {
