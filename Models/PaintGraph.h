@@ -11,7 +11,7 @@ using namespace std;
 class PaintGraph{
 private:
     Ui::MainWindow *ui;
-    float xBegin, xEnd,h = 0.01;
+    float xBegin, xEnd,h = 0.1;
     vector<float> xs,ys;
     QCPItemTracer *tracer;
     QCPGraph *spl;
@@ -26,13 +26,13 @@ private:
         ui->graph->xAxis->setTicks(true);
         ui->graph->yAxis->setTicks(true);
     }
-    void SettingSpl(){
-        spl = ui->graph->addGraph();
-        spl->setPen(QPen(Qt::blue));
+    QCPGraph* SettingSpl(){
+        QCPGraph *graph = ui->graph->addGraph();
+        return graph;
     }
-    void SettingTracer(){
+    void SettingTracer(QCPGraph* graph){
         tracer = new QCPItemTracer(ui->graph);
-        tracer->setGraph(spl);
+        tracer->setGraph(graph);
         tracer->setInterpolating(true);
         tracer->setStyle(QCPItemTracer::tsCrosshair);
     }
@@ -58,6 +58,8 @@ public:
         ui->graph->replot();
     }
     void PaintSpline(){
+        QCPGraph *graph = SettingSpl();
+        graph->setPen(QPen(Qt::red));
         QVector<double> x, y;
         Spline spline;
         spline.CreateSpline(xs,ys);
@@ -66,10 +68,12 @@ public:
             y.push_back(spline.Interpolat(X));
         }
         matrix = spline.GetMatrix();
-        spl->setData(x, y);
+        graph->setData(x, y);
         ui->graph->replot();
     }
     void PaintFirstDiff(){
+        QCPGraph *graph = SettingSpl();
+        graph->setPen(QPen(Qt::green));
         QVector<double> x, y;
         vector<float> splineValuesY,splineValuesX;
         Spline spline;
@@ -84,10 +88,12 @@ public:
             y.push_back(WorkingWithDerivatives::FirstDerivatives(splineValuesY[i-1],splineValuesY[i],h));
             i++;
         }
-        spl->setData(x, y);
+        graph->setData(x, y);
         ui->graph->replot();
     }
     void PaintSecondDiff(){
+        QCPGraph *graph = SettingSpl();
+        graph->setPen(QPen(Qt::blue));
         QVector<double> x, y;
         vector<float> splineValuesY,splineValuesX;
         Spline spline;
@@ -102,12 +108,11 @@ public:
             y.push_back(WorkingWithDerivatives::SecondDerivatives(splineValuesY[i-2],splineValuesY[i+2],splineValuesY[i],h));
             i++;
         }
-        spl->setData(x, y);
+        graph->setData(x, y);
         ui->graph->replot();
     }
     void PaintMatrix(){
         ui->forMatrix->clear();
-        // ui->forMatrix->setPlainText("Matrix:" + "\n");
         for(int i = 0; i < (int)matrix.size(); i++){
             for(int j = 0; j < (int) matrix.size();j++){
                 ui->forMatrix->setPlainText(ui->forMatrix->toPlainText() + "\t" + QString::number(matrix[i][j]));

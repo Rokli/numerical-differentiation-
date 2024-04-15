@@ -50,7 +50,22 @@ void MainWindow::on_CreateGraph_clicked()
     for (int i = 0; i < ui->tablePoints->rowCount(); i++)
         ys.push_back(ui->tablePoints->item(i, 1)->text().toFloat());
     PaintGraph paint(ui,xs,ys);
-    // paint.PaintSecondDiff();
-    paint.PaintSpline();
-    paint.PaintMatrix();
+    ui->graph->clearItems();
+    ui->graph->clearGraphs();
+    // if(ui->splineButton->isChecked()){
+    //     paint.PaintSpline();
+    //     paint.PaintMatrix();
+    // }
+    // if(ui->diffButton->isChecked()){
+    //     paint.PaintSpline();
+    //     paint.PaintFirstDiff();
+    //     paint.PaintSecondDiff();
+    // }
+
+    //     paint.PaintSpline();
+    //     paint.PaintMatrix();
+
+    //     paint.PaintSpline();
+    //     paint.PaintFirstDiff();
+    //     paint.PaintSecondDiff();
 }
